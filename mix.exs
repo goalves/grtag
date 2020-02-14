@@ -26,13 +26,16 @@ defmodule GRTag.MixProject do
 
   defp deps do
     [
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:jason, "~> 1.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix, "~> 1.4.11"},
       {:plug_cowboy, "~> 2.0"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:sobelow, "~> 0.8", only: :dev}
     ]
   end
 
