@@ -22,3 +22,12 @@ mix ecto.setup
 ```
 
 To start the application, you need to run `mix phx.server`.
+
+## Running Tests and Static Code Analysis
+
+All of them should run on CI, but you can run them locally using the following commands:
+
+- `mix coveralls` for test coverage;
+- `mix dialyzer` for static code analysis;
+- `mix sobelow` for static code analysis focused on security and a few performance aspects;
+- `mix credo` for general static code analysis;
