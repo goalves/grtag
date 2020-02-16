@@ -8,6 +8,7 @@ defmodule GRTag.MixProject do
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
+      dialyzer: [plt_file: {:no_warn, "priv/plts/dialyzer.plt"}],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
