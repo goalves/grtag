@@ -1,0 +1,12 @@
+/_build/
+/cover/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.ez
+GRTag-*.tar
+/priv/static/
+.sobelow
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
