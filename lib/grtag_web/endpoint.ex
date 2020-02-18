@@ -1,4 +1,4 @@
-defmodule GrtagWeb.Endpoint do
+defmodule GRTagWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :GRTag
 
   plug Plug.Static,
@@ -27,5 +27,5 @@ defmodule GrtagWeb.Endpoint do
     key: "_grtag_key",
     signing_salt: "09vy0Btz"
 
-  plug GrtagWeb.Router
+  plug GRTagWeb.Router
 end

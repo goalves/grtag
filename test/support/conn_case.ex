@@ -1,13 +1,13 @@
-defmodule GrtagWeb.ConnCase do
+defmodule GRTagWeb.ConnCase do
   use ExUnit.CaseTemplate
   alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
       use Phoenix.ConnTest
-      alias GrtagWeb.Router.Helpers, as: Routes
+      alias GRTagWeb.Router.Helpers, as: Routes
 
-      @endpoint GrtagWeb.Endpoint
+      @endpoint GRTagWeb.Endpoint
     end
   end
 

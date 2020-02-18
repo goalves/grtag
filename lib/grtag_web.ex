@@ -1,10 +1,10 @@
-defmodule GrtagWeb do
+defmodule GRTagWeb do
   def controller do
     quote do
-      use Phoenix.Controller, namespace: GrtagWeb
+      use Phoenix.Controller, namespace: GRTagWeb
 
       import Plug.Conn
-      alias GrtagWeb.Router.Helpers, as: Routes
+      alias GRTagWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -12,11 +12,11 @@ defmodule GrtagWeb do
     quote do
       use Phoenix.View,
         root: "lib/grtag_web/templates",
-        namespace: GrtagWeb
+        namespace: GRTagWeb
 
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
-      alias GrtagWeb.Router.Helpers, as: Routes
+      alias GRTagWeb.Router.Helpers, as: Routes
     end
   end
 
