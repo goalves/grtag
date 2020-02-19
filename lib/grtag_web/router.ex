@@ -1,11 +1,11 @@
-defmodule GrtagWeb.Router do
-  use GrtagWeb, :router
+defmodule GRTagWeb.Router do
+  use GRTagWeb, :router
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/api", GrtagWeb do
+  scope "/api", GRTagWeb do
     pipe_through :api
   end
 end

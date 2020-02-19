@@ -4,7 +4,7 @@ defmodule GRTag.Application do
   def start(_type, _args) do
     children = [
       GRTag.Repo,
-      GrtagWeb.Endpoint
+      GRTagWeb.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: GRTag.Supervisor]
@@ -12,7 +12,7 @@ defmodule GRTag.Application do
   end
 
   def config_change(changed, _new, removed) do
-    GrtagWeb.Endpoint.config_change(changed, removed)
+    GRTagWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

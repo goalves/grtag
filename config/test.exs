@@ -7,7 +7,7 @@ config :GRTag, GRTag.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :GRTag, GrtagWeb.Endpoint,
+config :GRTag, GRTagWeb.Endpoint,
   http: [port: 4002],
   server: false
 
