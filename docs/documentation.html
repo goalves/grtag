@@ -1,0 +1,414 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Github Repository Tag API</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#grtagweb.repositories">GRTagWeb.Repositories</a></div><div class="collapse-content"><ul><li><a href="#grtagweb.repositories-grtagweb.repositories">GRTagWeb.Repositories</a><ul><li><a href="#grtagweb.repositories-grtagweb.repositories-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>GRTagWeb.Repositories index</a></li><li><a href="#grtagweb.repositories-grtagweb.repositories-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>GRTagWeb.Repositories show</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#grtagweb.tags">GRTagWeb.Tags</a></div><div class="collapse-content"><ul><li><a href="#grtagweb.tags-grtagweb.tags">GRTagWeb.Tags</a><ul><li><a href="#grtagweb.tags-grtagweb.tags-post"><span class="badge post"><i class="fa fa-plus"></i></span>GRTagWeb.Tags create</a></li><li><a href="#grtagweb.tags-grtagweb.tags-delete"><span class="badge delete"><i class="fa fa-times"></i></span>GRTagWeb.Tags delete</a></li><li><a href="#grtagweb.tags-grtagweb.tags-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>GRTagWeb.Tags index</a></li><li><a href="#grtagweb.tags-grtagweb.tags-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>GRTagWeb.Tags show</a></li><li><a href="#grtagweb.tags-grtagweb.tags-patch"><span class="badge patch"><i class="fa fa-pencil"></i></span>GRTagWeb.Tags update</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#grtagweb.users">GRTagWeb.Users</a></div><div class="collapse-content"><ul><li><a href="#grtagweb.users-grtagweb.users">GRTagWeb.Users</a><ul><li><a href="#grtagweb.users-grtagweb.users-post"><span class="badge post"><i class="fa fa-plus"></i></span>GRTagWeb.Users create</a></li><li><a href="#grtagweb.users-grtagweb.users-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>GRTagWeb.Users show</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">Github Repository Tag API</h1></header><section id="grtagweb.repositories" class="resource-group"><h2 class="group-heading">GRTagWeb.Repositories <a href="#grtagweb.repositories" class="permalink">&para;</a></h2><div id="grtagweb.repositories-grtagweb.repositories" class="resource"><h3 class="resource-heading">GRTagWeb.Repositories <a href="#grtagweb.repositories-grtagweb.repositories" class="permalink">&nbsp;&para;</a></h3><div id="grtagweb.repositories-grtagweb.repositories-get" class="action get"><h4 class="action-heading"><div class="name">GRTagWeb.Repositories index</div><a href="#grtagweb.repositories-grtagweb.repositories-get" class="method get">GET</a><code class="uri">/api/v1/repositories</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/repositories</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>List Repositories</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/repositories</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4BBHFBDBxNeEAAAaE</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Voluptatem alias veniam commodi labore eos sint! Quos eius porro ut ipsum eveniet architecto tenetur quos quis? Asperiores sit fuga et minus quia earum labore aliquid? Id facere at nobis iure quo sapiente. Ut nisi eos repellat consectetur quas illum molestiae sit!"</span></span>,
+      "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">723040205</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"d39c80e7-3139-4d2b-aebe-6632a97b76b1"</span></span>,
+      "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"voluptates"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"voluptate"</span></span>,
+      "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"http://oconnell.biz"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Voluptas natus harum non tempore accusamus et. Doloremque doloribus voluptatum ut. Totam quisquam voluptatem qui fugiat voluptatem enim."</span></span>,
+      "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">945816364</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"fb3b5fc6-c3e3-4b26-bbce-e92438302848"</span></span>,
+      "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"modi"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"culpa"</span></span>,
+      "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"http://schroeder.name"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Earum hic doloremque in! Consequatur fuga officia consectetur ullam laudantium. Ut est nesciunt voluptas neque odit sed quae. Assumenda deserunt sit explicabo qui nisi ipsa."</span></span>,
+      "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">501490714</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"4eeedd54-7c86-44f7-93de-a5032f96909c"</span></span>,
+      "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"esse"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ad"</span></span>,
+      "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"http://bergstrom.info"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Molestias omnis qui sint repellat ipsa ea asperiores repudiandae et? Et perspiciatis sapiente quo molestiae? Et nostrum consequuntur odit in voluptas molestiae quibusdam?"</span></span>,
+      "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">311326755</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"b5f4e2cf-66ec-497d-835a-51430370986b"</span></span>,
+      "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"quam"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ut"</span></span>,
+      "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"http://kessler.net"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Ea et et et tempore mollitia expedita. Veniam aperiam aut quidem ratione velit dignissimos eos sapiente iure. Et non cum praesentium?"</span></span>,
+      "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">597447525</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"2807d029-f0a9-434e-afc5-7ff94b73a37e"</span></span>,
+      "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"esse"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"tempora"</span></span>,
+      "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"https://kub.net"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.repositories-grtagweb.repositories-get-1" class="action get"><h4 class="action-heading"><div class="name">GRTagWeb.Repositories show</div><a href="#grtagweb.repositories-grtagweb.repositories-get-1" class="method get">GET</a><code class="uri">/api/v1/repositories/</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/repositories/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch Repository</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/repositories/db9cd16f-2b86-491f-b397-43f8779dc888</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4BBEGuViPpEsAAAjI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Sapiente natus officiis et et omnis tempora. Unde facere vitae repellendus officiis dolorem aut assumenda quia? Quos eligendi maxime maxime. Hic aut quia in temporibus."</span></span>,
+    "<span class="hljs-attribute">github_id</span>": <span class="hljs-value"><span class="hljs-number">443584618</span></span>,
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"db9cd16f-2b86-491f-b397-43f8779dc888"</span></span>,
+    "<span class="hljs-attribute">language</span>": <span class="hljs-value"><span class="hljs-string">"repudiandae"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"nobis"</span></span>,
+    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"http://ernser.net"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch Repository fails when repository does not exist</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/repositories/771c76cc-45fe-4838-a9a6-23355f262710</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4BBCclXiSzrAAAAZE</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">detail</span>": <span class="hljs-value"><span class="hljs-string">"Not Found"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="grtagweb.tags" class="resource-group"><h2 class="group-heading">GRTagWeb.Tags <a href="#grtagweb.tags" class="permalink">&para;</a></h2><div id="grtagweb.tags-grtagweb.tags" class="resource"><h3 class="resource-heading">GRTagWeb.Tags <a href="#grtagweb.tags-grtagweb.tags" class="permalink">&nbsp;&para;</a></h3><div id="grtagweb.tags-grtagweb.tags-post" class="action post"><h4 class="action-heading"><div class="name">GRTagWeb.Tags create</div><a href="#grtagweb.tags-grtagweb.tags-post" class="method post">POST</a><code class="uri">/api/v1/users/3248f4c5-aa75-485f-8fe2-6bfeb40adf37/</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/users/3248f4c5-aa75-485f-8fe2-6bfeb40adf37/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Create Tag for an User</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/api/v1/users/6b908d87-763f-4dee-a122-384d5cd201b6/tags</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">tag</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"corrupti"</span></span>,
+    "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"e51ab8b9-e532-426f-8947-517a87c366f6"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"6b908d87-763f-4dee-a122-384d5cd201b6"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A83kVoB4hbQAAAVE</span><br><span class="hljs-attribute">location</span>: <span class="hljs-string">/api/v1/tags/3cd447ef-819c-4552-83f4-cdbb6fbe8ce7</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"3cd447ef-819c-4552-83f4-cdbb6fbe8ce7"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"corrupti"</span></span>,
+    "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"e51ab8b9-e532-426f-8947-517a87c366f6"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"6b908d87-763f-4dee-a122-384d5cd201b6"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Create Tag for an User when parameters are invalid</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/api/v1/users/3248f4c5-aa75-485f-8fe2-6bfeb40adf37/tags</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">tag</span>": <span class="hljs-value">{}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9gzd7DdrosAAAbI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
+    <span class="hljs-string">"repository_id can't be blank"</span>,
+    <span class="hljs-string">"name can't be blank"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.tags-grtagweb.tags-delete" class="action delete"><h4 class="action-heading"><div class="name">GRTagWeb.Tags delete</div><a href="#grtagweb.tags-grtagweb.tags-delete" class="method delete">DELETE</a><code class="uri">/api/v1/tags/</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/tags/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Delete Tag</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>DELETE</strong>  <code>/api/v1/tags/e4b78ee3-051e-45e5-97e8-e3bce5de0382</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>204</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9dpEzBCRGsAAAaI</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Delete Tag fails when tag does not exist</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>DELETE</strong>  <code>/api/v1/tags/0d01f385-2058-42c9-90fb-3c1d297e9682</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9AUw0BW-vkAAAUI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">detail</span>": <span class="hljs-value"><span class="hljs-string">"Not Found"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.tags-grtagweb.tags-get" class="action get"><h4 class="action-heading"><div class="name">GRTagWeb.Tags index</div><a href="#grtagweb.tags-grtagweb.tags-get" class="method get">GET</a><code class="uri">/api/v1/tags</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/tags</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>List Tags</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/tags</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9ZP0zBA0UMAAAYI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"c192b975-467c-4738-9784-6e1aea8a03dc"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"voluptatem"</span></span>,
+      "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"65b7da89-d429-44de-ba54-34fdaced50cc"</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"8c56b668-441e-41db-a3b3-c857376dc9e4"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"f3df23ea-0614-45bf-8a91-b83de8687f62"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"voluptatum"</span></span>,
+      "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"23d740b2-84e6-490a-bcfc-f4675d1f6f26"</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"52d943aa-5714-482a-abc5-334582a1fd6c"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"223a80bb-c4b0-4f40-82e0-032636c9e2ac"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"explicabo"</span></span>,
+      "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"51d23e31-b72a-4b8f-b7d2-763d9a151bc4"</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"626c046d-dd49-4f90-9aa1-35c82b799abd"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"ec9e1f49-2b47-4b9f-9d29-5478ceb8b46a"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"sit"</span></span>,
+      "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"83e6b6cf-fcc9-4596-935a-533748ec31b2"</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"54cdc8cd-3b8e-4f45-ae36-f1fb6f1a8ff3"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"14359eb2-8262-4ecc-87dc-20c2d126967a"</span></span>,
+      "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"sit"</span></span>,
+      "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"4c92cdd0-5b47-4518-bafe-71aa8345ae8a"</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"e03f0c8b-a194-4f73-9b60-f2094d7a8e1e"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.tags-grtagweb.tags-get-1" class="action get"><h4 class="action-heading"><div class="name">GRTagWeb.Tags show</div><a href="#grtagweb.tags-grtagweb.tags-get-1" class="method get">GET</a><code class="uri">/api/v1/tags/</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/tags/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch Tag</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/tags/519a0ffe-45cc-4259-8cb5-25f7379c76d4</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9GK2OAzo68AAAVI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"519a0ffe-45cc-4259-8cb5-25f7379c76d4"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"doloribus"</span></span>,
+    "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"74a90e37-f45e-4191-a751-2649d9165b75"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"3c931a5d-e087-400d-b90e-b730f3a15d6a"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch Tag fails when Tag does not exist</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/tags/7e67daf8-da1f-4b0b-8e2d-2822a87c92e1</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9aJdRj9eEQAAAYE</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">detail</span>": <span class="hljs-value"><span class="hljs-string">"Not Found"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.tags-grtagweb.tags-patch" class="action patch"><h4 class="action-heading"><div class="name">GRTagWeb.Tags update</div><a href="#grtagweb.tags-grtagweb.tags-patch" class="method patch">PATCH</a><code class="uri">/api/v1/tags/</code></h4><h4>Example URI</h4><div class="definition"><span class="method patch">PATCH</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/tags/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Updating Tag</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>PATCH</strong>  <code>/api/v1/tags/102e16ea-0e36-44a0-b16f-722c3b40117e</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">tag</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"new_name"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9Jf76jeCJkAAAWI</span><br><span class="hljs-attribute">location</span>: <span class="hljs-string">/api/v1/tags/102e16ea-0e36-44a0-b16f-722c3b40117e</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"102e16ea-0e36-44a0-b16f-722c3b40117e"</span></span>,
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"new_name"</span></span>,
+    "<span class="hljs-attribute">repository_id</span>": <span class="hljs-value"><span class="hljs-string">"8e07c14d-f4df-48b5-9ea0-b40f0f2ac5f6"</span></span>,
+    "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-string">"d354ae88-53b7-49c3-8f40-17293042a175"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Update Tag fails when tag does not exist</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>PATCH</strong>  <code>/api/v1/tags/1ba7c3ef-b7c9-4cc5-bac3-751c97950040</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">tag</span>": <span class="hljs-value">{}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9QSTuBgKm4AAAXI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">detail</span>": <span class="hljs-value"><span class="hljs-string">"Not Found"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Update Tag when parameters are invalid</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>PATCH</strong>  <code>/api/v1/tags/4ba6ab0c-2f4d-4061-accd-1b8688fd7622</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">tag</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-literal">null</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A9OwJfjKGfsAAAXE</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
+    <span class="hljs-string">"name can't be blank"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="grtagweb.users" class="resource-group"><h2 class="group-heading">GRTagWeb.Users <a href="#grtagweb.users" class="permalink">&para;</a></h2><div id="grtagweb.users-grtagweb.users" class="resource"><h3 class="resource-heading">GRTagWeb.Users <a href="#grtagweb.users-grtagweb.users" class="permalink">&nbsp;&para;</a></h3><div id="grtagweb.users-grtagweb.users-post" class="action post"><h4 class="action-heading"><div class="name">GRTagWeb.Users create</div><a href="#grtagweb.users-grtagweb.users-post" class="method post">POST</a><code class="uri">/api/v1/users</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/users</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Create User</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/api/v1/users</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">user</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"ralph_barrows"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>201</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A_30I_DbZb0AAAhI</span><br><span class="hljs-attribute">location</span>: <span class="hljs-string">/api/v1/users/b2328656-7349-46d1-853b-947695e328b8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"b2328656-7349-46d1-853b-947695e328b8"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"ralph_barrows"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Create User when parameters are invalid</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/api/v1/users</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">content-type</span>: <span class="hljs-string">multipart/mixed; boundary=plug_conn_test</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">user</span>": <span class="hljs-value">{}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>422</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A_-y9qgmr1IAAAIB</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">[
+    <span class="hljs-string">"username can't be blank"</span>
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="grtagweb.users-grtagweb.users-get" class="action get"><h4 class="action-heading"><div class="name">GRTagWeb.Users show</div><a href="#grtagweb.users-grtagweb.users-get" class="method get">GET</a><code class="uri">/api/v1/users/</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/api/v1/users/</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch User</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/users/93616b3d-83e9-4db3-b1ff-5d34da76991e</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A_2YBehaSXIAAAfI</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">data</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"93616b3d-83e9-4db3-b1ff-5d34da76991e"</span></span>,
+    "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"ruben_barton"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Request&nbsp;&nbsp;<code>Fetch User fails when user does not exist</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/api/v1/users/021307f4-fda5-48cd-8f04-953e98812641</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">accept</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>404</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">content-type</span>: <span class="hljs-string">application/json; charset=utf-8</span><br><span class="hljs-attribute">cache-control</span>: <span class="hljs-string">max-age=0, private, must-revalidate</span><br><span class="hljs-attribute">x-request-id</span>: <span class="hljs-string">Ffb4A_9nvNhHxBgAAAHB</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">errors</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">detail</span>": <span class="hljs-value"><span class="hljs-string">"Not Found"</span>
+  </span>}
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 26 Feb 2020</p><script>/* eslint-env browser */
+/* eslint quotes: [2, "single"] */
+'use strict';
+
+/*
+  Determine if a string ends with another string.
+*/
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+/*
+  Get a list of direct child elements by class name.
+*/
+function childrenByClass(element, name) {
+  var filtered = [];
+
+  for (var i = 0; i < element.children.length; i++) {
+    var child = element.children[i];
+    var classNames = child.className.split(' ');
+    if (classNames.indexOf(name) !== -1) {
+      filtered.push(child);
+    }
+  }
+
+  return filtered;
+}
+
+/*
+  Get an array [width, height] of the window.
+*/
+function getWindowDimensions() {
+  var w = window,
+      d = document,
+      e = d.documentElement,
+      g = d.body,
+      x = w.innerWidth || e.clientWidth || g.clientWidth,
+      y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+  return [x, y];
+}
+
+/*
+  Collapse or show a request/response example.
+*/
+function toggleCollapseButton(event) {
+    var button = event.target.parentNode;
+    var content = button.parentNode.nextSibling;
+    var inner = content.children[0];
+
+    if (button.className.indexOf('collapse-button') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        // Currently showing, so let's hide it
+        button.className = 'collapse-button';
+        content.style.maxHeight = '0px';
+    } else {
+        // Currently hidden, so let's show it
+        button.className = 'collapse-button show';
+        content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+function toggleTabButton(event) {
+    var i, index;
+    var button = event.target;
+
+    // Get index of the current button.
+    var buttons = childrenByClass(button.parentNode, 'tab-button');
+    for (i = 0; i < buttons.length; i++) {
+        if (buttons[i] === button) {
+            index = i;
+            button.className = 'tab-button active';
+        } else {
+            buttons[i].className = 'tab-button';
+        }
+    }
+
+    // Hide other tabs and show this one.
+    var tabs = childrenByClass(button.parentNode.parentNode, 'tab');
+    for (i = 0; i < tabs.length; i++) {
+        if (i === index) {
+            tabs[i].style.display = 'block';
+        } else {
+            tabs[i].style.display = 'none';
+        }
+    }
+}
+
+/*
+  Collapse or show a navigation menu. It will not be hidden unless it
+  is currently selected or `force` has been passed.
+*/
+function toggleCollapseNav(event, force) {
+    var heading = event.target.parentNode;
+    var content = heading.nextSibling;
+    var inner = content.children[0];
+
+    if (heading.className.indexOf('heading') === -1) {
+      // Clicked without hitting the right element?
+      return;
+    }
+
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      // Currently showing, so let's hide it, but only if this nav item
+      // is already selected. This prevents newly selected items from
+      // collapsing in an annoying fashion.
+      if (force || window.location.hash && endsWith(event.target.href, window.location.hash)) {
+        content.style.maxHeight = '0px';
+      }
+    } else {
+      // Currently hidden, so let's show it
+      content.style.maxHeight = inner.offsetHeight + 12 + 'px';
+    }
+}
+
+/*
+  Refresh the page after a live update from the server. This only
+  works in live preview mode (using the `--server` parameter).
+*/
+function refresh(body) {
+    document.querySelector('body').className = 'preload';
+    document.body.innerHTML = body;
+
+    // Re-initialize the page
+    init();
+    autoCollapse();
+
+    document.querySelector('body').className = '';
+}
+
+/*
+  Determine which navigation items should be auto-collapsed to show as many
+  as possible on the screen, based on the current window height. This also
+  collapses them.
+*/
+function autoCollapse() {
+  var windowHeight = getWindowDimensions()[1];
+  var itemsHeight = 64; /* Account for some padding */
+  var itemsArray = Array.prototype.slice.call(
+    document.querySelectorAll('nav .resource-group .heading'));
+
+  // Get the total height of the navigation items
+  itemsArray.forEach(function (item) {
+    itemsHeight += item.parentNode.offsetHeight;
+  });
+
+  // Should we auto-collapse any nav items? Try to find the smallest item
+  // that can be collapsed to show all items on the screen. If not possible,
+  // then collapse the largest item and do it again. First, sort the items
+  // by height from smallest to largest.
+  var sortedItems = itemsArray.sort(function (a, b) {
+    return a.parentNode.offsetHeight - b.parentNode.offsetHeight;
+  });
+
+  while (sortedItems.length && itemsHeight > windowHeight) {
+    for (var i = 0; i < sortedItems.length; i++) {
+      // Will collapsing this item help?
+      var itemHeight = sortedItems[i].nextSibling.offsetHeight;
+      if ((itemsHeight - itemHeight <= windowHeight) || i === sortedItems.length - 1) {
+        // It will, so let's collapse it, remove its content height from
+        // our total and then remove it from our list of candidates
+        // that can be collapsed.
+        itemsHeight -= itemHeight;
+        toggleCollapseNav({target: sortedItems[i].children[0]}, true);
+        sortedItems.splice(i, 1);
+        break;
+      }
+    }
+  }
+}
+
+/*
+  Initialize the interactive functionality of the page.
+*/
+function init() {
+    var i, j;
+
+    // Make collapse buttons clickable
+    var buttons = document.querySelectorAll('.collapse-button');
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = toggleCollapseButton;
+
+        // Show by default? Then toggle now.
+        if (buttons[i].className.indexOf('show') !== -1) {
+            toggleCollapseButton({target: buttons[i].children[0]});
+        }
+    }
+
+    var responseCodes = document.querySelectorAll('.example-names');
+    for (i = 0; i < responseCodes.length; i++) {
+        var tabButtons = childrenByClass(responseCodes[i], 'tab-button');
+        for (j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].onclick = toggleTabButton;
+
+            // Show by default?
+            if (j === 0) {
+                toggleTabButton({target: tabButtons[j]});
+            }
+        }
+    }
+
+    // Make nav items clickable to collapse/expand their content.
+    var navItems = document.querySelectorAll('nav .resource-group .heading');
+    for (i = 0; i < navItems.length; i++) {
+        navItems[i].onclick = toggleCollapseNav;
+
+        // Show all by default
+        toggleCollapseNav({target: navItems[i].children[0]});
+    }
+}
+
+// Initial call to set up buttons
+init();
+
+window.onload = function () {
+    autoCollapse();
+    // Remove the `preload` class to enable animations
+    document.querySelector('body').className = '';
+};
+</script></body></html>
