@@ -1,11 +1,13 @@
 defmodule GRTagWeb.Router do
   use GRTagWeb, :router
 
+  @version "v1"
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
-  scope "/api", GRTagWeb do
+  scope "/api/#{@version}", GRTagWeb do
     pipe_through :api
 
     resources "/users", UserController, only: [:create, :show] do
