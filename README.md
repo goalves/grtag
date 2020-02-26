@@ -52,4 +52,6 @@ You can install it it using `yarn global add aglio` or `npm install -g aglio`, d
 aglio -i docs/documentation.md -o docs/documentation.html
 ```
 
+And you can check the latest available documentation acessing the `docs/documentation.html` file.
+
 Alternatively, you can use a docker container and mount the correct volumes, but that is better disected in Aglio documentation itself.
