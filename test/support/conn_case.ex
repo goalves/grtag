@@ -5,6 +5,9 @@ defmodule GRTagWeb.ConnCase do
   using do
     quote do
       use Phoenix.ConnTest
+
+      import Bureaucrat.Helpers
+
       alias GRTagWeb.Router.Helpers, as: Routes
 
       @endpoint GRTagWeb.Endpoint

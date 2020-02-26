@@ -12,7 +12,10 @@ defmodule GRTagWeb.RepositoryControllerTest do
     test "should return a specific repository", %{conn: conn} do
       repository = insert(:repository)
 
-      conn = get(conn, Routes.repository_path(conn, :show, repository.id))
+      conn =
+        conn
+        |> get(Routes.repository_path(conn, :show, repository.id))
+        |> doc(description: "Fetch Repository", operation_id: "fetch_repository")
 
       assert json_response(conn, 200)["data"] == %{
                "id" => repository.id,
@@ -25,7 +28,14 @@ defmodule GRTagWeb.RepositoryControllerTest do
     end
 
     test "should return an error if the repository does not exist", %{conn: conn} do
-      conn = get(conn, Routes.repository_path(conn, :show, UUID.generate()))
+      conn =
+        conn
+        |> get(Routes.repository_path(conn, :show, UUID.generate()))
+        |> doc(
+          description: "Fetch Repository fails when repository does not exist",
+          operation_id: "fetch_repository_not_exist"
+        )
+
       assert json_response(conn, 404) == %{"errors" => %{"detail" => "Not Found"}}
     end
   end
@@ -36,7 +46,11 @@ defmodule GRTagWeb.RepositoryControllerTest do
 
       insert_list(repositories_number, :repository)
 
-      conn = get(conn, Routes.repository_path(conn, :index))
+      conn =
+        conn
+        |> get(Routes.repository_path(conn, :index))
+        |> doc(description: "List Repositories", operation_id: "list_repositories")
+
       contents = json_response(conn, 200)["data"]
       assert Enum.count(contents) == repositories_number
     end
