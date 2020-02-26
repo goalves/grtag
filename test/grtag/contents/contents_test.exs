@@ -4,10 +4,10 @@ defmodule GRTag.ContentsTest do
   import Mock
   import GRTag.{Factory, HTTPFactory}
 
-  alias Ecto.UUID
+  alias Ecto.{Changeset, UUID}
   alias Faker.Internet
   alias GRTag.Contents
-  alias GRTag.Contents.Repository
+  alias GRTag.Contents.{Repository, Tag}
   alias Tesla.Client
 
   describe "get_repository/1" do
@@ -42,7 +42,7 @@ defmodule GRTag.ContentsTest do
 
     test "should accept extra options for creating users" do
       repository = insert(:repository)
-      attributes = Map.drop(repository, [:__meta__, :__struct__])
+      attributes = Repository.to_map(repository)
 
       assert {:ok, %Repository{id: id, github_id: github_id}} =
                Contents.create_repository(attributes, on_conflict: :nothing)
@@ -70,5 +70,74 @@ defmodule GRTag.ContentsTest do
         assert Repository |> Repo.all() |> Enum.count() == 1
       end
     end
+  end
+
+  describe "get_tag/1" do
+    test "should return an the tag with the given id" do
+      tag = insert(:tag)
+      assert {:ok, fetch_tag = %Tag{}} = Contents.get_tag(tag.id)
+      assert fetch_tag.id == tag.id
+    end
+
+    test "should return an error if the an tag with the specified id does not exist",
+      do: assert({:error, :tag_does_not_exist} == Contents.get_tag(UUID.generate()))
+  end
+
+  describe "list_tags/0" do
+    test "should return a list of inserted tags" do
+      number_of_tags = :random.uniform(10)
+      tags_mapset = number_of_tags |> insert_list(:tag) |> Enum.map(& &1.id) |> MapSet.new()
+      fetched_tags = Contents.list_tags()
+      assert Enum.all?(fetched_tags, fn %struct{} -> struct == Tag end)
+      assert fetched_tags |> Enum.map(& &1.id) |> MapSet.new() == tags_mapset
+    end
+  end
+
+  describe "create_tag/1" do
+    test "should create a tag" do
+      tag_params = params_with_assocs(:tag)
+      assert {:ok, tag = %Tag{id: id}} = Contents.create_tag(tag_params)
+      refute Tag |> Repo.get(id) |> is_nil()
+    end
+
+    test "should not allow to create duplicate tag names for the same repository" do
+      tag_params = params_with_assocs(:tag)
+      assert {:ok, tag = %Tag{id: id}} = Contents.create_tag(tag_params)
+      assert {:error, changeset = %Changeset{}} = Contents.create_tag(tag_params)
+      assert errors_on(changeset) == %{name_repository_id: ["has already been taken"]}
+    end
+  end
+
+  describe "update_tag/2" do
+    @invalid_attributes %{}
+
+    test "should edit a tag" do
+      tag = insert(:tag, name: "old_name")
+      new_name = "new_name"
+      change_params = %{name: new_name}
+
+      assert {:ok, tag = %Tag{id: id}} = Contents.update_tag(tag.id, change_params)
+      assert tag.name == new_name
+    end
+
+    test "should return an error when tag does not exist",
+      do: assert({:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), @invalid_attributes))
+
+    test "should return an error when parameters are invalid" do
+      tag = insert(:tag)
+      assert {:error, changeset = %Changeset{}} = Contents.update_tag(tag.id, %{name: nil})
+      assert errors_on(changeset) == %{name: ["can't be blank"]}
+    end
+  end
+
+  describe "delete_tag/1" do
+    test "should delete a tag" do
+      tag = insert(:tag, name: "old_name")
+      assert {:ok, tag = %Tag{id: id}} = Contents.delete_tag(tag.id)
+      assert Tag |> Repo.get(id) |> is_nil()
+    end
+
+    test "should return an error when tag does not exist",
+      do: assert({:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), @invalid_attributes))
   end
 end

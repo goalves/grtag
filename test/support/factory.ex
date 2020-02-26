@@ -4,7 +4,7 @@ defmodule GRTag.Factory do
   alias Ecto.UUID
   alias Faker.{Internet, Lorem}
   alias GRTag.Accounts.User
-  alias GRTag.Contents.Repository
+  alias GRTag.Contents.{Repository, Tag}
   alias GRTag.Github.Starred
 
   @max_integer 999_999_999
@@ -13,6 +13,7 @@ defmodule GRTag.Factory do
 
   def repository_factory do
     %Repository{
+      id: UUID.generate(),
       description: Lorem.paragraph(),
       github_id: :random.uniform(@max_integer),
       url: Internet.url(),
@@ -29,6 +30,19 @@ defmodule GRTag.Factory do
       languages_url: Internet.url(),
       name: Lorem.word(),
       url: Internet.url()
+    }
+  end
+
+  def tag_factory do
+    user = build(:user)
+    repository = build(:repository)
+
+    %Tag{
+      user: user,
+      user_id: user.id,
+      repository: repository,
+      repository_id: repository.id,
+      name: Lorem.word()
     }
   end
 end

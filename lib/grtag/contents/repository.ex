@@ -2,6 +2,7 @@ defmodule GRTag.Contents.Repository do
   use GRTag, :schema
 
   alias Ecto.Changeset
+  alias GRTag.Contents.Tag
   alias GRTag.Github.Starred
 
   @required_fields [:github_id, :name, :url]
@@ -14,6 +15,8 @@ defmodule GRTag.Contents.Repository do
     field :description, :string
     field :url, :string
     field :language, :string
+
+    has_many(:tags, Tag)
 
     timestamps()
   end
