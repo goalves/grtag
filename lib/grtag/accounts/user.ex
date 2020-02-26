@@ -2,6 +2,7 @@ defmodule GRTag.Accounts.User do
   use GRTag, :schema
 
   alias Ecto.Changeset
+  alias GRTag.Contents.Tag
 
   @required_fields [:username]
   @fields @required_fields
@@ -10,6 +11,8 @@ defmodule GRTag.Accounts.User do
   @foreign_key_type :binary_id
   schema "users" do
     field :username, :string
+
+    has_many(:tags, Tag)
 
     timestamps()
   end
