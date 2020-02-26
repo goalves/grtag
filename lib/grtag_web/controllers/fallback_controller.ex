@@ -5,7 +5,7 @@ defmodule GRTagWeb.FallbackController do
 
   require Logger
 
-  @not_found_resource_errors [:user_does_not_exist, :repository_does_not_exist]
+  @not_found_resource_errors [:user_does_not_exist, :repository_does_not_exist, :tag_does_not_exist]
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
