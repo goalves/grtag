@@ -10,3 +10,4 @@ GRTag-*.tar
 .sobelow
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
+/docs/documentation.html
