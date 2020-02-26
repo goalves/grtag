@@ -4,10 +4,11 @@ defmodule GRTag.Workers.Importer do
   require Logger
 
   alias GRTag.Contents
+  alias GRTag.Contents.Repository
   alias Oban.Job
 
   @impl Oban.Worker
-  @spec perform(any(), Job.t()) :: {:ok, [GRTag.Contents.Repository.t()]} | {:error, any}
+  @spec perform(any(), Job.t()) :: {:ok, [%Repository{}]} | {:error, any}
   def perform(parameters = %{"github_username" => github_username}, job = %Job{}) when is_map(parameters) do
     Logger.info("Importing repositories for job #{inspect(job)}")
     Contents.import_user_repositories(github_username)
