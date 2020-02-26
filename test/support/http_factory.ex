@@ -1,16 +1,25 @@
 defmodule GRTag.HTTPFactory do
+  alias Tesla.Env
+
   @max_random 999_999_999
   @api_base "https://api.github.com"
-  def success(response_body \\ %{}), do: {:ok, %Tesla.Env{status: 200, body: response_body}}
-  def bad_request(response_body \\ %{}), do: {:ok, %Tesla.Env{status: 400, body: response_body}}
 
+  @spec success(any) :: {:ok, Env.t()}
+  def success(response_body \\ %{}), do: {:ok, %Env{status: 200, body: response_body}}
+
+  @spec bad_request(any) :: {:ok, Env.t()}
+  def bad_request(response_body \\ %{}), do: {:ok, %Env{status: 400, body: response_body}}
+
+  @spec success(any) :: {:ok, Env.t()}
   def success_paginated(next_url, response_body \\ %{}) do
     headers = [{"link", "<#{next_url}>; rel=\"next\", <#{next_url}>; rel=\"last\""}]
-    {:ok, %Tesla.Env{status: 200, body: response_body, headers: headers}}
+    {:ok, %Env{status: 200, body: response_body, headers: headers}}
   end
 
+  @spec tesla_connection_error :: {:error, :nx_domain}
   def tesla_connection_error, do: {:error, :nxdomain}
 
+  @spec user_starred_success :: {:ok, Env.t()}
   def user_starred_success do
     id = :random.uniform(@max_random)
     user_id = :random.uniform(@max_random)
