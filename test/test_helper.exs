@@ -1,6 +1,6 @@
 Bureaucrat.start(
   writer: Bureaucrat.ApiBlueprintWriter,
-  default_path: "docs/API_README.md",
+  default_path: "docs/documentation.md",
   paths: [],
   titles: [],
   title: "Github Repository Tag API",
