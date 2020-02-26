@@ -5,7 +5,7 @@ defmodule GRTag.MixProject do
     [
       app: :GRTag,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       dialyzer: [plt_file: {:no_warn, "priv/plts/dialyzer.plt"}],
@@ -31,15 +31,21 @@ defmodule GRTag.MixProject do
     [
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test},
       {:ecto_sql, "~> 3.1"},
+      {:ex_machina, "~> 2.4", only: :test},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:faker, "~> 0.13", only: :test},
       {:jason, "~> 1.0"},
+      {:mock, "~> 0.3.0", only: :test},
       {:phoenix_ecto, "~> 4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix, "~> 1.4.11"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, ">= 0.0.0"},
-      {:sobelow, "~> 0.8", only: :dev}
+      {:sobelow, "~> 0.8", only: :dev},
+      {:tesla, "~> 1.3.0"},
+      {:typed_struct, "~> 0.1.4"},
+      {:oban, "~> 1.1"}
     ]
   end
 

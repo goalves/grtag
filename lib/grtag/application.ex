@@ -2,9 +2,12 @@ defmodule GRTag.Application do
   use Application
 
   def start(_type, _args) do
+    oban_config = Application.get_env(:GRTag, Oban)
+
     children = [
       GRTag.Repo,
-      GRTagWeb.Endpoint
+      GRTagWeb.Endpoint,
+      {Oban, oban_config}
     ]
 
     opts = [strategy: :one_for_one, name: GRTag.Supervisor]

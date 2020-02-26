@@ -11,4 +11,8 @@ config :GRTag, GRTagWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :tesla, adapter: Tesla.Mock
+
 config :logger, level: :warn
+
+config :GRTag, Oban, crontab: false, queues: false, prune: :disabled

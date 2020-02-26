@@ -7,5 +7,8 @@ defmodule GRTagWeb.Router do
 
   scope "/api", GRTagWeb do
     pipe_through :api
+
+    resources "/users", UserController, only: [:create, :show]
+    resources "/repositories", RepositoryController, only: [:show, :index]
   end
 end

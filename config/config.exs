@@ -2,7 +2,8 @@ use Mix.Config
 
 config :GRTag,
   ecto_repos: [GRTag.Repo],
-  generators: [binary_id: true]
+  generators: [binary_id: true],
+  github_api_url: "https://api.github.com"
 
 config :GRTag, GRTagWeb.Endpoint,
   url: [host: "localhost"],
@@ -15,5 +16,10 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :phoenix, :json_library, Jason
+
+config :GRTag, Oban,
+  repo: GRTag.Repo,
+  prune: {:maxlen, 10_000},
+  queues: [default: 30, importers: 30]
 
 import_config "#{Mix.env()}.exs"
