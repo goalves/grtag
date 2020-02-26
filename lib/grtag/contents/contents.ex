@@ -19,6 +19,9 @@ defmodule GRTag.Contents do
     end
   end
 
+  @spec list_repositories :: [%Repository{}]
+  def list_repositories, do: Repo.all(Repository)
+
   @spec create_repository(map()) :: repository_change_response
   @spec create_repository(map(), keyword()) :: repository_change_response
   def create_repository(attributes, insert_options \\ []) when is_map(attributes) do

@@ -21,6 +21,16 @@ defmodule GRTag.ContentsTest do
       do: assert({:error, :repository_does_not_exist} == Contents.get_repository(UUID.generate()))
   end
 
+  describe "list_repositories/0" do
+    test "should return a list of inserted repositories" do
+      number_of_repositories = :random.uniform(10)
+      repositories_mapset = number_of_repositories |> insert_list(:repository) |> Enum.map(& &1.id) |> MapSet.new()
+      fetched_repositories = Contents.list_repositories()
+      assert Enum.all?(fetched_repositories, fn %struct{} -> struct == Repository end)
+      assert fetched_repositories |> Enum.map(& &1.id) |> MapSet.new() == repositories_mapset
+    end
+  end
+
   describe "create_repository/1" do
     @invalid_attributes %{}
 
