@@ -42,7 +42,7 @@ defmodule GRTag.ContentsTest do
 
     test "should accept extra options for creating users" do
       repository = insert(:repository)
-      attributes = Map.drop(repository, [:__meta__, :__struct__])
+      attributes = Repository.to_map(repository)
 
       assert {:ok, %Repository{id: id, github_id: github_id}} =
                Contents.create_repository(attributes, on_conflict: :nothing)
