@@ -31,6 +31,7 @@ defmodule GRTag.MixProject do
     [
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
+      {:bureaucrat, "~> 0.2.5"},
       {:ecto_sql, "~> 3.1"},
       {:ex_machina, "~> 2.4", only: :test},
       {:excoveralls, "~> 0.10", only: :test},
