@@ -1,12 +1,11 @@
 defmodule GRTagWeb.UserView do
   use GRTagWeb, :view
-  alias GRTagWeb.UserView
 
-  def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
-  end
+  alias GRTag.Accounts.User
 
-  def render("user.json", %{user: user}) do
-    %{id: user.id, username: user.username}
-  end
+  def render("show.json", %{user: user = %User{}}),
+    do: %{data: render_one(user, __MODULE__, "user.json")}
+
+  def render("user.json", %{user: user = %User{}}),
+    do: %{id: user.id, username: user.username}
 end
