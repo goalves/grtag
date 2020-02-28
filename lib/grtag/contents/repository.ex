@@ -33,4 +33,13 @@ defmodule GRTag.Contents.Repository do
   def build_map(%Starred{id: id, name: name, description: description, url: url, language: language}) do
     %{github_id: id, name: name, description: description, url: url, language: language}
   end
+
+  @spec query_by_user_tag(any, binary, binary) :: Query.t()
+  def query_by_user_tag(queriable, input, user_id) when is_binary(input) and is_binary(user_id) do
+    from(repository in queriable,
+      left_join: tag in assoc(repository, :tags),
+      where: ilike(tag.name, ^"%#{input}%"),
+      where: tag.user_id == ^user_id
+    )
+  end
 end

@@ -3,7 +3,7 @@ defmodule GRTag.Contents.RepositoryTest do
 
   import GRTag.Factory
 
-  alias Ecto.Changeset
+  alias Ecto.{Changeset, UUID}
   alias GRTag.Contents.Repository
 
   describe "changeset/2" do
@@ -38,6 +38,20 @@ defmodule GRTag.Contents.RepositoryTest do
       }
 
       assert expected_map == Repository.build_map(starred)
+    end
+  end
+
+  describe "query_by_user_tag/3" do
+    test "should return the correct query" do
+      user_id = UUID.generate()
+      input_field = Faker.Lorem.word()
+      queriable = Repository
+      query = Repository.query_by_user_tag(queriable, input_field, user_id)
+
+      assert inspect(query) ==
+               ~s{#Ecto.Query<from r0 in #{queriable |> Module.split() |> Enum.join(".")}, left_join: t1 in assoc(r0, :tags), where: ilike(t1.name, ^\"%#{
+                 input_field
+               }%\"), where: t1.user_id == ^\"#{user_id}\">}
     end
   end
 end
