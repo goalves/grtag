@@ -3,7 +3,8 @@ defmodule GRTag.Contents.RepositoryTest do
 
   import GRTag.Factory
 
-  alias Ecto.Changeset
+  alias Ecto.{Changeset, UUID}
+  alias Faker.Lorem
   alias GRTag.Contents.Repository
 
   describe "changeset/2" do
@@ -38,6 +39,41 @@ defmodule GRTag.Contents.RepositoryTest do
       }
 
       assert expected_map == Repository.build_map(starred)
+    end
+  end
+
+  describe "filters/2" do
+    test "should return a Repository queriable when parameters map is empty",
+      do: assert({:ok, Repository} == Repository.filters(Repository, %{}))
+
+    test "should return a similar user tag queriable when parameters map contains tag_user_id and tag_name" do
+      tag_user_id = UUID.generate()
+      tag_name = Lorem.word()
+      parameters = %{"tag_user_id" => tag_user_id, "tag_name" => tag_name}
+      queriable = Repository
+      queriable_expected = queriable |> Module.split() |> Enum.join(".")
+
+      assert {:ok, query} = Repository.filters(queriable, parameters)
+
+      assert inspect(query) ==
+               ~s{#Ecto.Query<from r0 in #{queriable_expected}, left_join: t1 in assoc(r0, :tags), where: ilike(t1.name, ^\"%#{
+                 tag_name
+               }%\"), where: t1.user_id == ^\"#{tag_user_id}\">}
+    end
+  end
+
+  describe "query_by_user_tag/3" do
+    test "should return the correct query" do
+      tag_user_id = UUID.generate()
+      tag_name = Lorem.word()
+      queriable = Repository
+      queriable_expected = queriable |> Module.split() |> Enum.join(".")
+      query = Repository.query_by_user_tag(queriable, tag_name, tag_user_id)
+
+      assert inspect(query) ==
+               ~s{#Ecto.Query<from r0 in #{queriable_expected}, left_join: t1 in assoc(r0, :tags), where: ilike(t1.name, ^\"%#{
+                 tag_name
+               }%\"), where: t1.user_id == ^\"#{tag_user_id}\">}
     end
   end
 end

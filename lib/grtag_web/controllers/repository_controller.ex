@@ -6,9 +6,9 @@ defmodule GRTagWeb.RepositoryController do
 
   action_fallback GRTagWeb.FallbackController
 
-  def index(conn, _) do
-    repositories = Contents.list_repositories()
-    render(conn, "index.json", repositories: repositories)
+  def index(conn, params) do
+    with {:ok, repositories} <- Contents.list_repositories(params),
+         do: render(conn, "index.json", repositories: repositories)
   end
 
   def show(conn, %{"id" => id}) do

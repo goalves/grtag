@@ -7,6 +7,43 @@
 ### GRTagWeb.Repositories index [GET /api/v1/repositories]
 
 
++ Request List Repositories with Filters
+**GET**&nbsp;&nbsp;`/api/v1/repositories`
+
+    + Headers
+
+            accept: application/json
+            content-type: multipart/mixed; boundary=plug_conn_test
+    + Body
+
+            {
+              "tag_name": "asperiores",
+              "tag_user_id": "115697aa-3d04-44b1-864d-620b2c8194cc"
+            }
+
++ Response 200
+
+    + Headers
+
+            content-type: application/json; charset=utf-8
+            cache-control: max-age=0, private, must-revalidate
+            x-request-id: FfgCdQQrZ8B43hoAAATI
+    + Body
+
+            {
+              "data": [
+                {
+                  "description": "Consequatur ullam qui soluta neque fugiat! Molestiae et velit quisquam aut asperiores aut dignissimos est. Illo tempora praesentium et quam. Maiores culpa sed excepturi neque sapiente? Doloribus quasi eos nisi laborum.",
+                  "github_id": 443584618,
+                  "id": "5030d027-23db-494c-a0dc-96f9cf69dfc4",
+                  "language": "ullam",
+                  "name": "qui",
+                  "url": "https://kris.biz"
+                }
+              ]
+            }
+
+
 + Request List Repositories
 **GET**&nbsp;&nbsp;`/api/v1/repositories`
 
