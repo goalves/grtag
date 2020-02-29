@@ -30,16 +30,26 @@ defmodule GRTag.Contents.Repository do
   end
 
   @spec build_map(%Starred{}) :: map()
-  def build_map(%Starred{id: id, name: name, description: description, url: url, language: language}) do
-    %{github_id: id, name: name, description: description, url: url, language: language}
+  def build_map(%Starred{id: id, name: name, description: description, url: url, language: language}),
+    do: %{github_id: id, name: name, description: description, url: url, language: language}
+
+  @spec filters(any, map) :: {:ok, EctoQuery.t()} | {:error, Changeset.t()}
+  def filters(queriable, params) do
+    with {:ok, filters} <- Query.parse_filters(@acceptable_filters, params),
+         do: {:ok, apply_filters(queriable, filters)}
   end
 
-  @spec query_by_user_tag(any, binary, binary) :: Query.t()
-  def query_by_user_tag(queriable, input, user_id) when is_binary(input) and is_binary(user_id) do
+  defp apply_filters(queriable, %{tag_name: tag_name, tag_user_id: tag_user_id}),
+    do: query_by_user_tag(queriable, tag_name, tag_user_id)
+
+  defp apply_filters(queriable, _), do: queriable
+
+  @spec query_by_user_tag(any, binary, binary) :: EctoQuery.t()
+  def query_by_user_tag(queriable, tag_name, tag_user_id) when is_binary(tag_name) and is_binary(tag_user_id) do
     from(repository in queriable,
       left_join: tag in assoc(repository, :tags),
-      where: ilike(tag.name, ^"%#{input}%"),
-      where: tag.user_id == ^user_id
+      where: ilike(tag.name, ^"%#{tag_name}%"),
+      where: tag.user_id == ^tag_user_id
     )
   end
 end
