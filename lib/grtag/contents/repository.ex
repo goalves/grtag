@@ -2,11 +2,14 @@ defmodule GRTag.Contents.Repository do
   use GRTag, :schema
 
   alias Ecto.Changeset
+  alias Ecto.Query, as: EctoQuery
   alias GRTag.Contents.Tag
   alias GRTag.Github.Starred
+  alias GRTag.Query
 
   @required_fields [:github_id, :name, :url]
   @fields [:description, :language | @required_fields]
+  @acceptable_filters %{tag_user_id: :string, tag_name: :string}
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "repositories" do

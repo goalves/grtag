@@ -5,8 +5,7 @@ defmodule GRTagWeb.RepositoryControllerTest do
 
   alias Ecto.UUID
 
-  setup %{conn: conn},
-    do: {:ok, conn: put_req_header(conn, "accept", "application/json")}
+  setup %{conn: conn}, do: {:ok, conn: put_req_header(conn, "accept", "application/json")}
 
   describe "GET /repositories/:id" do
     test "should return a specific repository", %{conn: conn} do
@@ -53,6 +52,32 @@ defmodule GRTagWeb.RepositoryControllerTest do
 
       contents = json_response(conn, 200)["data"]
       assert Enum.count(contents) == repositories_number
+    end
+
+    test "should accept filters", %{conn: conn} do
+      repository = insert(:repository)
+      user = insert(:user)
+      tag = insert(:tag, user: nil, user_id: user.id, repository: nil, repository_id: repository.id)
+
+      conn =
+        conn
+        |> get(Routes.repository_path(conn, :index), %{tag_user_id: user.id, tag_name: tag.name})
+        |> doc(description: "List Repositories with Filters", operation_id: "list_repositories_with_filters")
+
+      contents = json_response(conn, 200)["data"]
+      assert Enum.count(contents) == 1
+    end
+
+    test "should return an error when filters are invalid", %{conn: conn} do
+      conn =
+        conn
+        |> get(Routes.repository_path(conn, :index), %{tag_user_id: 1, tag_name: 1})
+        |> doc(
+          description: "List Repositories with Filters with invalid filters",
+          operation_id: "list_repositories_with_filters_failed"
+        )
+
+      assert json_response(conn, 422)["errors"] == ["tag_name is invalid", "tag_user_id is invalid"]
     end
   end
 end

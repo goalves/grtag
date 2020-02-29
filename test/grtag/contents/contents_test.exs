@@ -22,12 +22,33 @@ defmodule GRTag.ContentsTest do
   end
 
   describe "list_repositories/0" do
+    @invalid_filter_attributes %{"tag_user_id" => 1, "tag_name" => 1}
+
     test "should return a list of inserted repositories" do
       number_of_repositories = :random.uniform(10)
       repositories_mapset = number_of_repositories |> insert_list(:repository) |> Enum.map(& &1.id) |> MapSet.new()
-      fetched_repositories = Contents.list_repositories()
+      assert {:ok, fetched_repositories} = Contents.list_repositories()
       assert Enum.all?(fetched_repositories, fn %struct{} -> struct == Repository end)
       assert fetched_repositories |> Enum.map(& &1.id) |> MapSet.new() == repositories_mapset
+    end
+
+    test "should return a list of inserted repositories when using filters" do
+      repository = insert(:repository)
+      user = insert(:user)
+      tag = insert(:tag, repository: nil, repository_id: repository.id, user: nil, user_id: user.id)
+      insert(:repository)
+
+      params = %{"tag_user_id" => user.id, "tag_name" => tag.name}
+
+      assert {:ok, repositories_list} = Contents.list_repositories(params)
+      assert Enum.count(repositories_list) == 1
+      assert [fetched_repository] = repositories_list
+      assert fetched_repository.id == repository.id
+    end
+
+    test "should return an error when parameters are invalid for a repository" do
+      assert {:error, changeset = %Changeset{}} = Contents.list_repositories(@invalid_filter_attributes)
+      assert errors_on(changeset) == %{tag_name: ["is invalid"], tag_user_id: ["is invalid"]}
     end
   end
 
