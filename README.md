@@ -34,6 +34,18 @@ All of them should run on CI, but you can run them locally using the following c
 - [Credo](https://github.com/rrrene/credo): `mix credo` for general static code analysis;
 - Elixir default Formatter: `mix format --check-formatted` for ensuring codebase is formatted.
 
+## Github API Authorization
+
+Github has a lower request limiting for unauthorized API calls. You can use [Personal Tokens](https://github.com/settings/tokens), adding the ability to fetch public repositories on the list of permissions, to circumvent this issue.
+
+After creating a Personal Token, you can add it as an environment variable when running the application:
+
+```sh
+GITHUB_API_TOKEN=previously_generated_token mix phx.server
+```
+
+In case none is provided, the application will continue to work without any authorization set.
+
 ## Generating API Documentation
 
 To generate the API documentation, you can use the following command:
