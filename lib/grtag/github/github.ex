@@ -1,4 +1,6 @@
 defmodule GRTag.Github do
+  require Logger
+
   alias GRTag.Github.{Link, Request, Response}
   alias Tesla.Middleware.{BaseUrl, FollowRedirects, Headers, JSON}
   alias Tesla.{Client, Env}
@@ -24,9 +26,12 @@ defmodule GRTag.Github do
   defp headers do
     github_token = Application.get_env(:GRTag, :github_api_token)
 
-    if is_nil(github_token),
-      do: {Headers, @default_github_api_headers},
-      else: {Headers, [{"Authorization", "token #{github_token}"} | @default_github_api_headers]}
+    if is_nil(github_token) do
+      Logger.warn("GITHUB_API_TOKEN not set, using Client without any Authorization method can lead to errors.")
+      {Headers, @default_github_api_headers}
+    else
+      {Headers, [{"Authorization", "token #{github_token}"} | @default_github_api_headers]}
+    end
   end
 
   @spec call(Client.t(), Request.t()) :: responses

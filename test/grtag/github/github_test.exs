@@ -9,6 +9,12 @@ defmodule GRTag.GithubTest do
   alias GRTag.Github.{Request, Response}
 
   describe "client/0" do
+    setup do
+      token = "test_token"
+      Application.put_env(:GRTag, :github_api_token, token)
+      [token: token]
+    end
+
     @github_api_url Application.get_env(:GRTag, :github_api_url)
     @github_api_version "application/vnd.github.v3+json"
     @github_api_headers [
@@ -24,19 +30,18 @@ defmodule GRTag.GithubTest do
       assert base_url == @github_api_url
     end
 
-    test "should return a new client with correct headers" do
+    @tag :capture_log
+    test "should return a new client with correct headers without authorization" do
+      Application.delete_env(:GRTag, :github_api_token)
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
       assert headers == @github_api_headers
     end
 
-    test "should return a new client with correct headers when github_api_token is set" do
-      token = UUID.generate()
-      Application.put_env(:GRTag, :github_api_token, token)
+    test "should return a new client with correct headers when github_api_token is set", %{token: token} do
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
       assert headers == [{"Authorization", "token #{token}"} | @github_api_headers]
-      Application.delete_env(:GRTag, :github_api_token)
     end
 
     defp find_middleware(%Tesla.Client{pre: pre}, module),
