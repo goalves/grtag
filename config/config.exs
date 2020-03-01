@@ -3,7 +3,8 @@ use Mix.Config
 config :GRTag,
   ecto_repos: [GRTag.Repo],
   generators: [binary_id: true],
-  github_api_url: "https://api.github.com"
+  github_api_url: "https://api.github.com",
+  github_api_token: System.get_env("GITHUB_API_TOKEN")
 
 config :GRTag, GRTagWeb.Endpoint,
   url: [host: "localhost"],

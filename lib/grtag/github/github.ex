@@ -1,25 +1,33 @@
 defmodule GRTag.Github do
   alias GRTag.Github.{Link, Request, Response}
+  alias Tesla.Middleware.{BaseUrl, FollowRedirects, Headers, JSON}
   alias Tesla.{Client, Env}
 
   @github_api_url Application.get_env(:GRTag, :github_api_url)
   @github_api_version "application/vnd.github.v3+json"
-  @github_api_headers [
+  @default_github_api_headers [
     {"Accept", @github_api_version},
     {"User-Agent", "GRTag"}
   ]
   @default_middleware [
-    {Tesla.Middleware.BaseUrl, @github_api_url},
-    Tesla.Middleware.JSON,
-    Tesla.Middleware.FollowRedirects,
-    {Tesla.Middleware.Headers, @github_api_headers}
+    {BaseUrl, @github_api_url},
+    JSON,
+    FollowRedirects
   ]
 
   @type url :: binary()
   @type responses :: {:ok, Response.t()} | {:error, any()}
 
   @spec client :: Client.t()
-  def client, do: Tesla.client(@default_middleware)
+  def client, do: Tesla.client([headers() | @default_middleware])
+
+  defp headers do
+    github_token = Application.get_env(:GRTag, :github_api_token)
+
+    if is_nil(github_token),
+      do: {Headers, @default_github_api_headers},
+      else: {Headers, [{"Authorization", "token #{github_token}"} | @default_github_api_headers]}
+  end
 
   @spec call(Client.t(), Request.t()) :: responses
   def call(client = %Client{}, request = %Request{method: :index}) do

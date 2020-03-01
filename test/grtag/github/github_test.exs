@@ -30,6 +30,15 @@ defmodule GRTag.GithubTest do
       assert headers == @github_api_headers
     end
 
+    test "should return a new client with correct headers when github_api_token is set" do
+      token = UUID.generate()
+      Application.put_env(:GRTag, :github_api_token, token)
+      assert client = %Tesla.Client{} = Github.client()
+      assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
+      assert headers == [{"Authorization", "token #{token}"} | @github_api_headers]
+      Application.delete_env(:GRTag, :github_api_token)
+    end
+
     defp find_middleware(%Tesla.Client{pre: pre}, module),
       do: Enum.find(pre, fn {tesla_module, _, _} -> tesla_module == module end)
   end
