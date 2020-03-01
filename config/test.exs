@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :GRTag, github_api_token: "test_token"
+
 config :GRTag, GRTag.Repo,
   username: "postgres",
   password: "postgres",
