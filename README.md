@@ -30,7 +30,7 @@ All of them should run on CI, but you can run them locally using the following c
 
 - [Coveralls](https://github.com/parroty/excoveralls): `mix coveralls` for test coverage;
 - [Dialyxir](https://github.com/jeremyjh/dialyxir): `mix dialyzer` for static code analysis and spec validation;
-- [Sobelow](https://github.com/nccgroup/sobelow): `mix sobelow` for static code analysis focused on security and a few performance aspects;
+- [Sobelow](https://github.com/nccgroup/sobelow): `mix sobelow --config` for static code analysis focused on security and a few performance aspects;
 - [Credo](https://github.com/rrrene/credo): `mix credo` for general static code analysis;
 - Elixir default Formatter: `mix format --check-formatted` for ensuring codebase is formatted.
 
