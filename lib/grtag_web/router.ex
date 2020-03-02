@@ -3,9 +3,7 @@ defmodule GRTagWeb.Router do
 
   @version "v1"
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  pipeline :api, do: plug(:accepts, ["json"])
 
   scope "/api/#{@version}", GRTagWeb do
     pipe_through :api

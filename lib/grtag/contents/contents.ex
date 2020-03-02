@@ -54,7 +54,7 @@ defmodule GRTag.Contents do
     do: Starred.user_starred(client, github_username)
 
   defp build_repositories(%Response{body: starred_repositories}) when is_list(starred_repositories),
-    do: Enum.map(starred_repositories, fn repository -> repository |> Repository.build_map() end)
+    do: Enum.map(starred_repositories, &Repository.build_map/1)
 
   defp insert_all_repositories(response = %Response{}) do
     response
@@ -118,5 +118,6 @@ defmodule GRTag.Contents do
     end
   end
 
+  @spec tag_change(%Tag{}, map()) :: Changeset.t()
   def tag_change(tag = %Tag{}, changes) when is_map(changes), do: Tag.changeset(tag, changes)
 end
