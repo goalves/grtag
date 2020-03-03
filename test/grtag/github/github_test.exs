@@ -12,7 +12,7 @@ defmodule GRTag.GithubTest do
     setup do: [token: set_default_token()]
 
     @default_token "test_token"
-    @github_api_url Application.get_env(:GRTag, :github_api_url)
+    @github_api_url Application.get_env(:gr_tag, :github_api_url)
     @github_api_version "application/vnd.github.v3+json"
     @github_api_headers [
       {"Accept", @github_api_version},
@@ -29,7 +29,7 @@ defmodule GRTag.GithubTest do
 
     @tag :capture_log
     test "returns a new client with correct headers without authorization" do
-      Application.delete_env(:GRTag, :github_api_token)
+      Application.delete_env(:gr_tag, :github_api_token)
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
       assert headers == @github_api_headers
@@ -47,7 +47,7 @@ defmodule GRTag.GithubTest do
 
     defp set_default_token do
       token = @default_token
-      Application.put_env(:GRTag, :github_api_token, token)
+      Application.put_env(:gr_tag, :github_api_token, token)
       token
     end
   end

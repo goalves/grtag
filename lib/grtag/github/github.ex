@@ -5,7 +5,7 @@ defmodule GRTag.Github do
   alias Tesla.Middleware.{BaseUrl, FollowRedirects, Headers, JSON}
   alias Tesla.{Client, Env}
 
-  @github_api_url Application.get_env(:GRTag, :github_api_url)
+  @github_api_url Application.get_env(:gr_tag, :github_api_url)
   @github_api_version "application/vnd.github.v3+json"
   @default_github_api_headers [
     {"Accept", @github_api_version},
@@ -24,7 +24,7 @@ defmodule GRTag.Github do
   def client, do: Tesla.client([headers() | @default_middleware])
 
   defp headers do
-    github_token = Application.get_env(:GRTag, :github_api_token)
+    github_token = Application.get_env(:gr_tag, :github_api_token)
 
     if is_nil(github_token) do
       Logger.warn("GITHUB_API_TOKEN not set, using Client without any Authorization method can lead to errors.")

@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :GRTag, GRTag.Repo,
+config :gr_tag, GRTag.Repo,
   username: "postgres",
   password: "postgres",
   database: "grtag_dev",
@@ -8,7 +8,7 @@ config :GRTag, GRTag.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
-config :GRTag, GRTagWeb.Endpoint,
+config :gr_tag, GRTagWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,

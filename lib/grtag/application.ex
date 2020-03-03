@@ -2,7 +2,7 @@ defmodule GRTag.Application do
   use Application
 
   def start(_type, _args) do
-    oban_config = Application.get_env(:GRTag, Oban)
+    oban_config = Application.get_env(:gr_tag, Oban)
 
     children = [
       GRTag.Repo,

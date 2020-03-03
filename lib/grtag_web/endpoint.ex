@@ -1,9 +1,9 @@
 defmodule GRTagWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :GRTag
+  use Phoenix.Endpoint, otp_app: :gr_tag
 
   plug Plug.Static,
     at: "/",
-    from: :GRTag,
+    from: :gr_tag,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
