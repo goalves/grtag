@@ -5,6 +5,7 @@ defmodule GRTag.Accounts do
   alias GRTag.Accounts.User
   alias GRTag.Repo
   alias GRTag.Workers.Importer
+  alias Oban.Job
 
   @type user_response :: {:error, :user_does_not_exist} | {:ok, %User{}}
   @type user_change_response :: {:ok, %User{}} | {:error, Changeset.t()}
@@ -24,7 +25,7 @@ defmodule GRTag.Accounts do
     user_attributes = User.params_for(attributes)
 
     Multi.new()
-    |> Multi.insert(:user, user_change(%User{}, user_attributes))
+    |> Multi.insert(:user, User.changeset(%User{}, user_attributes))
     |> Multi.run(:enqueue_importer, fn _, %{user: user} -> enqueue_importer(user) end)
     |> Repo.transaction()
     |> case do
@@ -33,11 +34,10 @@ defmodule GRTag.Accounts do
     end
   end
 
+  @spec enqueue_importer(%User{}) :: {:ok, Job.t()} | {:error, Changeset.t()}
   defp enqueue_importer(user = %User{}) do
     %{github_username: user.username}
     |> Importer.new()
     |> Oban.insert()
   end
-
-  defp user_change(user = %User{}, attributes) when is_map(attributes), do: User.changeset(user, attributes)
 end

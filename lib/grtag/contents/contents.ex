@@ -92,17 +92,17 @@ defmodule GRTag.Contents do
     tag_attributes = Tag.params_for(attributes)
 
     %Tag{}
-    |> tag_change(tag_attributes)
+    |> Tag.changeset(tag_attributes)
     |> Repo.insert()
   end
 
   @spec update_tag(binary, map()) :: tag_response | tag_change_response
   def update_tag(id, changes) when is_binary(id) and is_map(changes) do
-    changes_map = Tag.params_for(changes, remove_extras: true)
+    tag_changes = Tag.params_for(changes, remove_extras: true)
 
     Multi.new()
     |> Multi.run(:get, fn _, _ -> get_tag(id) end)
-    |> Multi.update(:update, fn %{get: tag = %Tag{}} -> tag_change(tag, changes_map) end)
+    |> Multi.update(:update, fn %{get: tag = %Tag{}} -> Tag.changeset(tag, tag_changes) end)
     |> Repo.transaction()
     |> case do
       {:ok, %{update: updated_tag = %Tag{}}} -> {:ok, updated_tag}
@@ -121,7 +121,4 @@ defmodule GRTag.Contents do
       {:error, _, reason, _} -> {:error, reason}
     end
   end
-
-  @spec tag_change(%Tag{}, map()) :: Changeset.t()
-  def tag_change(tag = %Tag{}, changes) when is_map(changes), do: Tag.changeset(tag, changes)
 end
