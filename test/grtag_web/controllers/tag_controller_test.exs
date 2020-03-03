@@ -68,7 +68,7 @@ defmodule GRTagWeb.UserTagControllerTest do
       assert json_response(conn, 422)["errors"] != %{}
     end
 
-    test "should return an error if the tag does not exist", %{conn: conn} do
+    test "returns an error if the tag does not exist", %{conn: conn} do
       conn =
         conn
         |> patch(Routes.tag_path(conn, :update, UUID.generate()), tag: %{})
@@ -92,7 +92,7 @@ defmodule GRTagWeb.UserTagControllerTest do
       assert Repo.all(Tag) == []
     end
 
-    test "should return an error if the tag does not exist", %{conn: conn} do
+    test "returns an error if the tag does not exist", %{conn: conn} do
       conn =
         conn
         |> delete(Routes.tag_path(conn, :delete, UUID.generate()))
@@ -103,7 +103,7 @@ defmodule GRTagWeb.UserTagControllerTest do
   end
 
   describe "GET /tags" do
-    test "should return a list of tags", %{conn: conn} do
+    test "returns a list of tags", %{conn: conn} do
       tags_number = :random.uniform(10)
 
       insert_list(tags_number, :tag)
@@ -115,7 +115,7 @@ defmodule GRTagWeb.UserTagControllerTest do
   end
 
   describe "GET /tags/:id" do
-    test "should return a specific tag", %{conn: conn} do
+    test "returns a specific tag", %{conn: conn} do
       tag = insert(:tag)
 
       conn =
@@ -131,7 +131,7 @@ defmodule GRTagWeb.UserTagControllerTest do
              }
     end
 
-    test "should return an error if the tag does not exist", %{conn: conn} do
+    test "returns an error if the tag does not exist", %{conn: conn} do
       conn =
         conn
         |> get(Routes.tag_path(conn, :show, UUID.generate()))

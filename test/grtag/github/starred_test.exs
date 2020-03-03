@@ -42,7 +42,7 @@ defmodule GRTag.Github.StarredTest do
   end
 
   describe "as_structure" do
-    test "should return a valid structure from map" do
+    test "returns a valid structure from map" do
       id = :random.uniform(@max_integer)
       name = Lorem.word()
       description = Lorem.paragraph()

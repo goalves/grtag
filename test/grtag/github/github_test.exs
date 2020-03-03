@@ -21,14 +21,14 @@ defmodule GRTag.GithubTest do
     @tesla_headers_module Tesla.Middleware.Headers
     @tesla_base_url_module Tesla.Middleware.BaseUrl
 
-    test "should return a new client with correct base url" do
+    test "returns a new client with correct base url" do
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_base_url_module, _, [base_url]} = find_middleware(client, @tesla_base_url_module)
       assert base_url == @github_api_url
     end
 
     @tag :capture_log
-    test "should return a new client with correct headers without authorization" do
+    test "returns a new client with correct headers without authorization" do
       Application.delete_env(:GRTag, :github_api_token)
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
@@ -36,7 +36,7 @@ defmodule GRTag.GithubTest do
       set_default_token()
     end
 
-    test "should return a new client with correct headers when github_api_token is set", %{token: token} do
+    test "returns a new client with correct headers when github_api_token is set", %{token: token} do
       assert client = %Tesla.Client{} = Github.client()
       assert {@tesla_headers_module, _, [headers]} = find_middleware(client, @tesla_headers_module)
       assert headers == [{"Authorization", "token #{token}"} | @github_api_headers]
@@ -55,7 +55,7 @@ defmodule GRTag.GithubTest do
   describe "call/2" do
     setup do: %{client: Github.client(), url: Faker.Internet.url()}
 
-    test "should return a response structure on successful request", %{client: client, url: url} do
+    test "returns a response structure on successful request", %{client: client, url: url} do
       {:ok, success_response} = success()
       request = %Request{method: :index, url: url, decoding_function: &decoding_function_mock/1}
 
@@ -66,7 +66,7 @@ defmodule GRTag.GithubTest do
       end
     end
 
-    test "should return a response structure on unsucessful request", %{client: client, url: url} do
+    test "returns a response structure on unsucessful request", %{client: client, url: url} do
       {:ok, bad_request} = bad_request()
       request = %Request{method: :index, url: url, decoding_function: &decoding_function_mock/1}
 
@@ -77,7 +77,7 @@ defmodule GRTag.GithubTest do
       end
     end
 
-    test "should return an error when request fails for any other reason", %{client: client, url: url} do
+    test "returns an error when request fails for any other reason", %{client: client, url: url} do
       request = %Request{method: :index, url: url, decoding_function: &decoding_function_mock/1}
 
       with_mock Tesla, get: fn _, _ -> tesla_connection_error() end do

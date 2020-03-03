@@ -1,5 +1,5 @@
 defmodule GRTag.ContentsTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: true
 
   import Mock
   import GRTag.{Factory, HTTPFactory}
@@ -11,20 +11,18 @@ defmodule GRTag.ContentsTest do
   alias Tesla.Client
 
   describe "get_repository/1" do
-    test "should return an the repository with the given id" do
+    test "returns an the repository with the given id" do
       repository = insert(:repository)
       assert {:ok, fetch_repository = %Repository{}} = Contents.get_repository(repository.id)
       assert fetch_repository.id == repository.id
     end
 
-    test "should return an error if the an repository with the specified id does not exist",
+    test "returns an error if the an repository with the specified id does not exist",
       do: assert({:error, :repository_does_not_exist} == Contents.get_repository(UUID.generate()))
   end
 
   describe "list_repositories/0" do
-    @invalid_filter_attributes %{"tag_user_id" => 1, "tag_name" => 1}
-
-    test "should return a list of inserted repositories" do
+    test "returns a list of inserted repositories" do
       number_of_repositories = :random.uniform(10)
       repositories_mapset = number_of_repositories |> insert_list(:repository) |> Enum.map(& &1.id) |> MapSet.new()
       assert {:ok, fetched_repositories} = Contents.list_repositories()
@@ -32,7 +30,7 @@ defmodule GRTag.ContentsTest do
       assert fetched_repositories |> Enum.map(& &1.id) |> MapSet.new() == repositories_mapset
     end
 
-    test "should return a list of inserted repositories when using filters" do
+    test "returns a list of inserted repositories when using filters" do
       repository = insert(:repository)
       user = insert(:user)
       tag = insert(:tag, repository: nil, repository_id: repository.id, user: nil, user_id: user.id)
@@ -46,15 +44,14 @@ defmodule GRTag.ContentsTest do
       assert fetched_repository.id == repository.id
     end
 
-    test "should return an error when parameters are invalid for a repository" do
-      assert {:error, changeset = %Changeset{}} = Contents.list_repositories(@invalid_filter_attributes)
+    test "returns an error when parameters are invalid for a repository" do
+      invalid_filter_attributes = %{"tag_user_id" => 1, "tag_name" => 1}
+      assert {:error, changeset = %Changeset{}} = Contents.list_repositories(invalid_filter_attributes)
       assert errors_on(changeset) == %{tag_name: ["is invalid"], tag_user_id: ["is invalid"]}
     end
   end
 
   describe "create_repository/1" do
-    @invalid_attributes %{}
-
     test "should create an repository" do
       attributes = params_for(:repository)
       assert {:ok, %Repository{id: id}} = Contents.create_repository(attributes)
@@ -72,8 +69,10 @@ defmodule GRTag.ContentsTest do
       assert Repository |> Repo.get(id) |> is_nil()
     end
 
-    test "should return an error when repository attributes are invalid",
-      do: assert({:error, %Ecto.Changeset{}} = Contents.create_repository(@invalid_attributes))
+    test "returns an error when repository attributes are invalid" do
+      invalid_attributes = %{}
+      assert {:error, %Ecto.Changeset{}} = Contents.create_repository(invalid_attributes)
+    end
   end
 
   describe "import_user_repositories/1" do
@@ -94,18 +93,18 @@ defmodule GRTag.ContentsTest do
   end
 
   describe "get_tag/1" do
-    test "should return an the tag with the given id" do
+    test "returns an the tag with the given id" do
       tag = insert(:tag)
       assert {:ok, fetch_tag = %Tag{}} = Contents.get_tag(tag.id)
       assert fetch_tag.id == tag.id
     end
 
-    test "should return an error if the an tag with the specified id does not exist",
+    test "returns an error if the an tag with the specified id does not exist",
       do: assert({:error, :tag_does_not_exist} == Contents.get_tag(UUID.generate()))
   end
 
   describe "list_tags/0" do
-    test "should return a list of inserted tags" do
+    test "returns a list of inserted tags" do
       number_of_tags = :random.uniform(10)
       tags_mapset = number_of_tags |> insert_list(:tag) |> Enum.map(& &1.id) |> MapSet.new()
       fetched_tags = Contents.list_tags()
@@ -130,8 +129,6 @@ defmodule GRTag.ContentsTest do
   end
 
   describe "update_tag/2" do
-    @invalid_attributes %{}
-
     test "should edit a tag" do
       tag = insert(:tag, name: "old_name")
       new_name = "new_name"
@@ -141,10 +138,12 @@ defmodule GRTag.ContentsTest do
       assert tag.name == new_name
     end
 
-    test "should return an error when tag does not exist",
-      do: assert({:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), @invalid_attributes))
+    test "returns an error when tag does not exist" do
+      invalid_attributes = %{}
+      assert {:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), invalid_attributes)
+    end
 
-    test "should return an error when parameters are invalid" do
+    test "returns an error when parameters are invalid" do
       tag = insert(:tag)
       assert {:error, changeset = %Changeset{}} = Contents.update_tag(tag.id, %{name: nil})
       assert errors_on(changeset) == %{name: ["can't be blank"]}
@@ -158,7 +157,9 @@ defmodule GRTag.ContentsTest do
       assert Tag |> Repo.get(id) |> is_nil()
     end
 
-    test "should return an error when tag does not exist",
-      do: assert({:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), @invalid_attributes))
+    test "returns an error when tag does not exist" do
+      invalid_attributes = %{}
+      assert {:error, :tag_does_not_exist} = Contents.update_tag(UUID.generate(), invalid_attributes)
+    end
   end
 end

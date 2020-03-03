@@ -11,7 +11,7 @@ defmodule GRTagWeb.UserControllerTest do
     do: {:ok, conn: put_req_header(conn, "accept", "application/json")}
 
   describe "GET /users/:id" do
-    test "should return a specific user", %{conn: conn} do
+    test "returns a specific user", %{conn: conn} do
       user = insert(:user)
 
       conn =
@@ -22,7 +22,7 @@ defmodule GRTagWeb.UserControllerTest do
       assert json_response(conn, 200)["data"] == %{"id" => user.id, "username" => user.username}
     end
 
-    test "should return an error if the user does not exist", %{conn: conn} do
+    test "returns an error if the user does not exist", %{conn: conn} do
       conn =
         conn
         |> get(Routes.user_path(conn, :show, UUID.generate()))

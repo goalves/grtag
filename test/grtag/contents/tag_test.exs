@@ -1,5 +1,5 @@
 defmodule GRTag.Contents.TagTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: true
 
   import GRTag.Factory
 
@@ -7,14 +7,14 @@ defmodule GRTag.Contents.TagTest do
   alias GRTag.Contents.Tag
 
   describe "changeset/2" do
-    @valid_attributes params_for(:tag)
-    @invalid_attributes %{}
+    test "returns a valid changeset when parameters are valid" do
+      attributes = params_for(:tag)
+      assert %Changeset{valid?: true} = Tag.changeset(%Tag{}, attributes)
+    end
 
-    test "should return a valid changeset when parameters are valid",
-      do: assert(%Changeset{valid?: true} = Tag.changeset(%Tag{}, @valid_attributes))
-
-    test "should return an invalid changeset when parameters are invalid" do
-      changeset = Tag.changeset(%Tag{}, @invalid_attributes)
+    test "returns an invalid changeset when parameters are invalid" do
+      invalid_attributes = %{}
+      changeset = Tag.changeset(%Tag{}, invalid_attributes)
       refute changeset.valid?
 
       assert errors_on(changeset) == %{

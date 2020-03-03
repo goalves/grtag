@@ -1,5 +1,5 @@
 defmodule GRTag.Workers.ImporterTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: false
 
   import ExUnit.CaptureLog
   import Mock
@@ -30,7 +30,7 @@ defmodule GRTag.Workers.ImporterTest do
     end
 
     @tag :capture_log
-    test "should return an error when parameters are invalid",
+    test "returns an error when parameters are invalid",
       do: assert({:error, :invalid_parameters} == Importer.perform(@invalid_parameters, %Job{}))
 
     test "should log errors when parameters do not match perform function" do

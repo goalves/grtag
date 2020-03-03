@@ -1,5 +1,5 @@
 defmodule GRTag.Github.ResponseTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: true
   alias Tesla.Env
 
   alias GRTag.Github.Response
@@ -7,7 +7,7 @@ defmodule GRTag.Github.ResponseTest do
   @default_headers [{"key", "value"}]
 
   describe "parse/1" do
-    test "should return a response structure from a tesla env" do
+    test "returns a response structure from a tesla env" do
       env = env_fixture()
 
       response = Response.parse(env, &decoding_function_mock/1)
@@ -19,7 +19,7 @@ defmodule GRTag.Github.ResponseTest do
       assert response.url == env.url
     end
 
-    test "should return a response structure containing links from the headers" do
+    test "returns a response structure containing links from the headers" do
     end
   end
 

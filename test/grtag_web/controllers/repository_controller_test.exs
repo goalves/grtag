@@ -8,7 +8,7 @@ defmodule GRTagWeb.RepositoryControllerTest do
   setup %{conn: conn}, do: {:ok, conn: put_req_header(conn, "accept", "application/json")}
 
   describe "GET /repositories/:id" do
-    test "should return a specific repository", %{conn: conn} do
+    test "returns a specific repository", %{conn: conn} do
       repository = insert(:repository)
 
       conn =
@@ -26,7 +26,7 @@ defmodule GRTagWeb.RepositoryControllerTest do
              }
     end
 
-    test "should return an error if the repository does not exist", %{conn: conn} do
+    test "returns an error if the repository does not exist", %{conn: conn} do
       conn =
         conn
         |> get(Routes.repository_path(conn, :show, UUID.generate()))
@@ -40,7 +40,7 @@ defmodule GRTagWeb.RepositoryControllerTest do
   end
 
   describe "GET /repositories" do
-    test "should return a list of repositories", %{conn: conn} do
+    test "returns a list of repositories", %{conn: conn} do
       repositories_number = :random.uniform(10)
 
       insert_list(repositories_number, :repository)
@@ -68,7 +68,7 @@ defmodule GRTagWeb.RepositoryControllerTest do
       assert Enum.count(contents) == 1
     end
 
-    test "should return an error when filters are invalid", %{conn: conn} do
+    test "returns an error when filters are invalid", %{conn: conn} do
       conn =
         conn
         |> get(Routes.repository_path(conn, :index), %{tag_user_id: 1, tag_name: 1})

@@ -1,5 +1,5 @@
 defmodule GRTag.Contents.RepositoryTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: true
 
   import GRTag.Factory
 
@@ -8,14 +8,14 @@ defmodule GRTag.Contents.RepositoryTest do
   alias GRTag.Contents.Repository
 
   describe "changeset/2" do
-    @valid_attributes params_for(:repository)
-    @invalid_attributes %{}
+    test "returns a valid changeset when parameters are valid" do
+      attributes = params_for(:repository)
+      assert %Changeset{valid?: true} = Repository.changeset(%Repository{}, attributes)
+    end
 
-    test "should return a valid changeset when parameters are valid",
-      do: assert(%Changeset{valid?: true} = Repository.changeset(%Repository{}, @valid_attributes))
-
-    test "should return an invalid changeset when parameters are invalid" do
-      changeset = Repository.changeset(%Repository{}, @invalid_attributes)
+    test "returns an invalid changeset when parameters are invalid" do
+      invalid_attributes = %{}
+      changeset = Repository.changeset(%Repository{}, invalid_attributes)
       refute changeset.valid?
 
       assert errors_on(changeset) == %{
@@ -43,10 +43,10 @@ defmodule GRTag.Contents.RepositoryTest do
   end
 
   describe "filters/2" do
-    test "should return a Repository queriable when parameters map is empty",
+    test "returns a Repository queriable when parameters map is empty",
       do: assert({:ok, Repository} == Repository.filters(Repository, %{}))
 
-    test "should return a similar user tag queriable when parameters map contains tag_user_id and tag_name" do
+    test "returns a similar user tag queriable when parameters map contains tag_user_id and tag_name" do
       tag_user_id = UUID.generate()
       tag_name = Lorem.word()
       parameters = %{"tag_user_id" => tag_user_id, "tag_name" => tag_name}
@@ -63,7 +63,7 @@ defmodule GRTag.Contents.RepositoryTest do
   end
 
   describe "query_by_user_tag/3" do
-    test "should return the correct query" do
+    test "returns the correct query" do
       tag_user_id = UUID.generate()
       tag_name = Lorem.word()
       queriable = Repository

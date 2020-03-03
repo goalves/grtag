@@ -1,5 +1,5 @@
 defmodule GRTag.QueryTest do
-  use GRTag.DataCase
+  use GRTag.DataCase, async: true
 
   alias Ecto.Changeset
   alias Faker.Lorem
@@ -17,7 +17,7 @@ defmodule GRTag.QueryTest do
       assert {:ok, %{key => value}} == Query.parse_filters(acceptable_filters, params)
     end
 
-    test "should return an error if the value type is wrong" do
+    test "returns an error if the value type is wrong" do
       key_string = Lorem.word()
       # credo:disable-for-next-line
       key = String.to_atom(key_string)
