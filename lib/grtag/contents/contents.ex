@@ -23,8 +23,12 @@ defmodule GRTag.Contents do
   end
 
   @spec list_repositories :: {:ok, [%Repository{}]} | {:error, Changeset.t()}
-  def list_repositories(params \\ %{}),
-    do: with({:ok, queriable} <- Repository.filters(Repository, params), do: {:ok, Repo.all(queriable)})
+  def list_repositories(params \\ %{}) do
+    case Repository.filters(Repository, params) do
+      {:ok, queriable} -> {:ok, Repo.all(queriable)}
+      error -> error
+    end
+  end
 
   @spec create_repository(map()) :: repository_change_response
   @spec create_repository(map(), keyword()) :: repository_change_response
