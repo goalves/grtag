@@ -79,7 +79,7 @@ jobs:
         run: mix format --check-formatted
 
       - name: Credo Analysis
-        run: mix credo
+        run: mix credo --strict
 
       - name: Sobelow Analysis
         run: mix sobelow --config
