@@ -1,6 +1,4 @@
 defmodule GRTag.Accounts do
-  import Ecto.Query, warn: false
-
   alias Ecto.{Changeset, Multi}
   alias GRTag.Accounts.User
   alias GRTag.Repo

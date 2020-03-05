@@ -1,6 +1,4 @@
 defmodule GRTag.Contents do
-  import Ecto.Query, warn: false
-
   alias Ecto.{Changeset, Multi}
   alias GRTag.Contents.{Repository, Tag}
   alias GRTag.Github.{Response, Starred}
