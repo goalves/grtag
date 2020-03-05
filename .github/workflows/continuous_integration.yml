@@ -19,6 +19,7 @@ jobs:
           path: _build
           key: ${{ runner.os }}-build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-build-
 
       - uses: actions/cache@v1
@@ -26,6 +27,7 @@ jobs:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-mix-
 
       - name: Fetch Dependencies
@@ -51,6 +53,7 @@ jobs:
           path: _build
           key: ${{ runner.os }}-build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-build-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-build-
 
       - uses: actions/cache@v1
@@ -58,6 +61,7 @@ jobs:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-mix-
 
       - uses: actions/cache@v1
@@ -65,6 +69,7 @@ jobs:
           path: priv/plts
           key: ${{ runner.os }}-plt-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-plt-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-plt-
 
       - name: Fetch Dependencies
@@ -113,6 +118,7 @@ jobs:
           path: _build
           key: ${{ runner.os }}-test-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-test-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-test-
 
       - uses: actions/cache@v1
@@ -120,6 +126,7 @@ jobs:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
+            ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
             ${{ runner.os }}-mix-
 
       - name: Fetch Dependencies
