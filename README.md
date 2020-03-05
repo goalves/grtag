@@ -7,7 +7,7 @@ This repository contains application of the GRTag project. This application allo
 The application depends on multiple parts to work properly. Even though it is possible to boot up in different ways, the recommended settings are as follows:
 
 - Elixir 1.10-otp22;
-- Erlang 22.1.X;
+- Erlang 22.1;
 - Postgres 11;
 - Docker.
 
