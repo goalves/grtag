@@ -1,3 +1,5 @@
+![Continuous Integration](https://github.com/goalves/grtag/workflows/Continuous%20Integration/badge.svg?branch=master)
+
 # GRTag
 
 This repository contains application of the GRTag project. This application allows users to add _Tags_ to _Repositories_ an user has as their favorites on _Github_.
