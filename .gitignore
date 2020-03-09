@@ -11,3 +11,4 @@ GRTag-*.tar
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
 /docs/documentation.html
+/docs/documentation.md
